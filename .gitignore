@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local build artifacts.
+outputs/
+*.zip
+
+# Historical scratch and verification directories from local skill development.
+work/
+
+# Local environments.
+.venv/
+env/

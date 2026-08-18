@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Travel Guide"
+  short_description: "Plan platform-led themed trips"
+  default_prompt: "Use $plan-travel-guide to plan a themed trip to {destination} from {start_date} to {end_date}."
