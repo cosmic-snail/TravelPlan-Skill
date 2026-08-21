@@ -26,9 +26,13 @@ EXPECTED_ZIP_ENTRIES = {
 }
 
 REQUIRED_SKILL_TERMS = [
+    "Map/OTA/Ticketing Category Sweep",
+    "Local Vocabulary Discovery",
+    "Universal Keyword Bank",
+    "destination-relevant equivalents",
     "Theme Reconnaissance",
     "Theme Profile",
-    "Platform Evidence Matrix",
+    "Discovery Evidence Matrix",
     "TopK",
     "完整 POI 总表",
     "按天行程",
@@ -38,16 +42,44 @@ REQUIRED_SKILL_TERMS = [
     "B站",
 ]
 
+FORBIDDEN_GENERIC_SKILL_TERMS = [
+    "A馆",
+    "B馆",
+    "C馆",
+    "D馆",
+    "E馆",
+    "连廊",
+    "负一层",
+    "6楼",
+    "MTR",
+    "新玛特",
+    "吾悦",
+    "恒隆",
+    "大悦城",
+]
+
+FORBIDDEN_README_EXAMPLE_TERMS = [
+    "东京",
+    "成都",
+    "上海南京路",
+    "香港旺角",
+    "沈阳",
+]
+
 REQUIRED_README_TERMS = [
     "# Plan Travel Guide Skill",
     "安装",
     "使用",
     "$plan-travel-guide",
     "旅行目的地",
-    "开始日期",
-    "结束日期",
+    "日期强烈建议提供",
+    "地图/OTA/票务候选池扫描",
+    "本地词汇发现",
+    "通用关键词库",
+    "最小来源组合",
+    "等价平台",
     "主题画像",
-    "平台证据矩阵",
+    "发现证据矩阵",
     "完整 POI 总表",
     "按天行程",
     "打包",
@@ -101,6 +133,9 @@ def validate_repo() -> list[str]:
         for term in REQUIRED_SKILL_TERMS:
             if term not in skill:
                 errors.append(f"SKILL.md missing required term: {term}")
+        for term in FORBIDDEN_GENERIC_SKILL_TERMS:
+            if term in skill:
+                errors.append(f"SKILL.md contains over-specific generic-search example: {term}")
 
     agent = read_text(AGENT_YAML)
     if agent:
@@ -117,6 +152,9 @@ def validate_repo() -> list[str]:
         for term in REQUIRED_README_TERMS:
             if term not in readme:
                 errors.append(f"README.md missing required term: {term}")
+        for term in FORBIDDEN_README_EXAMPLE_TERMS:
+            if term in readme:
+                errors.append(f"README.md contains over-specific example: {term}")
 
     return errors
 
