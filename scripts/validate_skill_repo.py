@@ -26,9 +26,10 @@ EXPECTED_ZIP_ENTRIES = {
 }
 
 REQUIRED_SKILL_TERMS = [
+    "Map/OTA/Ticketing Category Sweep",
     "Theme Reconnaissance",
     "Theme Profile",
-    "Platform Evidence Matrix",
+    "Discovery Evidence Matrix",
     "TopK",
     "完整 POI 总表",
     "按天行程",
@@ -44,10 +45,10 @@ REQUIRED_README_TERMS = [
     "使用",
     "$plan-travel-guide",
     "旅行目的地",
-    "开始日期",
-    "结束日期",
+    "日期强烈建议提供",
+    "地图/OTA/票务候选池扫描",
     "主题画像",
-    "平台证据矩阵",
+    "发现证据矩阵",
     "完整 POI 总表",
     "按天行程",
     "打包",
