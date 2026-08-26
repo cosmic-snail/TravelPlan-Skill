@@ -15,6 +15,9 @@ SKILL_DIR = ROOT / "plan-travel-guide"
 SKILL_MD = SKILL_DIR / "SKILL.md"
 AGENT_YAML = SKILL_DIR / "agents" / "openai.yaml"
 README = ROOT / "README.md"
+LICENSE = ROOT / "LICENSE"
+COMMUNITY_GUIDE = ROOT / "docs" / "community-sharing.md"
+VALIDATE_WORKFLOW = ROOT / ".github" / "workflows" / "validate.yml"
 PACKAGE_SCRIPT = ROOT / "scripts" / "package_skill.py"
 PACKAGE_SHELL = ROOT / "scripts" / "package.sh"
 
@@ -86,6 +89,9 @@ REQUIRED_README_TERMS = [
     "skill.zip",
     "验证",
     "维护",
+    "npx skills add cosmic-snail/TravelPlan-Skill",
+    "skills.sh",
+    "MIT",
 ]
 
 
@@ -116,7 +122,16 @@ def parse_frontmatter(markdown: str) -> dict[str, str]:
 def validate_repo() -> list[str]:
     errors: list[str] = []
 
-    for path in [SKILL_MD, AGENT_YAML, README, PACKAGE_SCRIPT, PACKAGE_SHELL]:
+    for path in [
+        SKILL_MD,
+        AGENT_YAML,
+        README,
+        LICENSE,
+        COMMUNITY_GUIDE,
+        VALIDATE_WORKFLOW,
+        PACKAGE_SCRIPT,
+        PACKAGE_SHELL,
+    ]:
         if not path.exists():
             errors.append(f"missing required file: {path.relative_to(ROOT)}")
 
@@ -155,6 +170,26 @@ def validate_repo() -> list[str]:
         for term in FORBIDDEN_README_EXAMPLE_TERMS:
             if term in readme:
                 errors.append(f"README.md contains over-specific example: {term}")
+
+    license_text = read_text(LICENSE)
+    if license_text:
+        for term in [
+            "MIT License",
+            "Copyright (c) 2026 cosmic-snail",
+            "Permission is hereby granted",
+        ]:
+            if term not in license_text:
+                errors.append(f"LICENSE missing required term: {term}")
+
+    workflow = read_text(VALIDATE_WORKFLOW)
+    if workflow:
+        for term in [
+            "python3 scripts/validate_skill_repo.py",
+            "./scripts/package.sh",
+            "unzip -t outputs/skill.zip",
+        ]:
+            if term not in workflow:
+                errors.append(f"validate workflow missing required command: {term}")
 
     return errors
 

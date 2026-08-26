@@ -1,5 +1,9 @@
 # Plan Travel Guide Skill
 
+[![Validate](https://github.com/cosmic-snail/TravelPlan-Skill/actions/workflows/validate.yml/badge.svg)](https://github.com/cosmic-snail/TravelPlan-Skill/actions/workflows/validate.yml)
+[![skills.sh](https://skills.sh/b/cosmic-snail/TravelPlan-Skill)](https://skills.sh/cosmic-snail/TravelPlan-Skill)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 `plan-travel-guide` 是一个用于生成旅游攻略的 Codex Skill。它面向“目的地 + 日期/时段 + 旅行偏好”的旅行规划场景，尤其适合需要从小红书、抖音、微博/新浪、B站、地图、OTA、票务、商场目录和公开网页中发现 POI，再结合官网、商家信息或订票页做时效性核验的攻略任务。
 
 这个仓库把 Skill 源码、Agent 展示配置、打包脚本和校验脚本放在一起，方便版本管理、复现 `skill.zip`、安装到本机 Codex，以及后续迭代。
@@ -252,7 +256,18 @@ POI 排序综合考虑：
 
 ## 安装
 
-### 方法一：从仓库源码安装
+### 方法一：Skills CLI（推荐）
+
+```bash
+npx skills add cosmic-snail/TravelPlan-Skill \
+  --skill plan-travel-guide \
+  --agent codex \
+  --global
+```
+
+安装完成后，新对话中可以使用 `$plan-travel-guide`。也可以在 [skills.sh](https://skills.sh/cosmic-snail/TravelPlan-Skill) 查看社区索引和安装信息。
+
+### 方法二：从仓库源码安装
 
 将 `plan-travel-guide/` 目录复制到 Codex skills 目录：
 
@@ -267,7 +282,7 @@ cp -R plan-travel-guide ~/.codex/skills/
 $plan-travel-guide
 ```
 
-### 方法二：从 skill.zip 安装
+### 方法三：从 skill.zip 安装
 
 先打包：
 
@@ -355,6 +370,13 @@ python3 scripts/validate_skill_repo.py --zip outputs/skill.zip
 - 不要只输出商场或街区，要拆出具体店铺、楼层、活动点、机位、餐厅和备选。
 - 不要把某个城市、商场、品牌、楼层命名或本地方言写成全局默认例子；这些只能在具体行程执行时从当前搜索结果派生。
 - 每次改动后都要用目标主题做一次回归，例如二次元、复古文艺探店、情侣约会、本地特色。
+
+## 限制与许可证
+
+- 这个 Skill 依赖当前公开网页来核验 POI、营业时间、活动日期、票务、预约和路线可行性。
+- 社交平台内容只用于发现线索，不证明商家仍营业、活动仍有效或票务仍可购买。
+- Skill 不会代替用户购票、预约、付款或绕过平台访问控制，也不保证任何地点或路线持续可用。
+- 项目采用 [MIT License](LICENSE)。
 
 ## 常见问题
 
