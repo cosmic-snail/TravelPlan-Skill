@@ -184,6 +184,8 @@ def validate_repo() -> list[str]:
     workflow = read_text(VALIDATE_WORKFLOW)
     if workflow:
         for term in [
+            "actions/checkout@v7",
+            "actions/setup-python@v7",
             "python3 scripts/validate_skill_repo.py",
             "./scripts/package.sh",
             "unzip -t outputs/skill.zip",

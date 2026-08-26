@@ -8,11 +8,10 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: python3 scripts/validate_skill_repo.py
       - run: ./scripts/package.sh
       - run: unzip -t outputs/skill.zip
-
